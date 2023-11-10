@@ -1,0 +1,19 @@
+SET profiling = 1;
+
+SELECT COUNT(*)
+FROM job_posts
+WHERE description = 'Data Analyst';
+
+SHOW PROFILES;
+
+SELECT COUNT(*)
+FROM job_posts
+WHERE description LIKE '%Data Analyst%';
+
+SHOW PROFILES;
+
+SELECT COUNT(*)
+FROM job_posts
+WHERE description REGEXP 'Data Analyst';
+
+SHOW PROFILES;
