@@ -1,0 +1,28 @@
+USE Jobs
+
+
+// part 1~4
+db.job_posts.find({description : 'Data Analyst'}).explain("executionStats")
+db.job_posts.find({description : /Data Analyst/}).explain("executionStats")
+
+db.job_posts.find({title : 'Data Analyst'}).explain("executionStats")
+db.job_posts.find({title : /Data Analyst/}).explain("executionStats")
+
+//part 5: add operator, test if operator influence the time as 1+1
+db.job_posts.find({title : {$not : {$eq:'Data Analyst'}}}).explain("executionStats")
+db.job_posts.find({title : {$not : /Data Analyst/}}).explain("executionStats")
+
+db.job_posts.find({$or : [{title : 'Data Analyst'} , {description : 'Data Analyst'}]}).explain("executionStats")
+db.job_posts.find({$or : [{title : /Data Analyst/} , {description : /Data Analyst/}]}).explain("executionStats")
+
+db.job_posts.find({$and : [{title : 'Data Analyst'} , {description : 'Data Analyst'}]}).explain("executionStats")
+db.job_posts.find({$and : [{title : /Data Analyst/} , {description : /Data Analyst/}]}).explain("executionStats")
+
+
+//part 6: add select restriction would optimize?
+
+
+//part 7: haven't finish yet(other operators in like and regex, for example [ ], and _)
+
+
+
