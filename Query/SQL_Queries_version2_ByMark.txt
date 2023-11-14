@@ -1,0 +1,141 @@
+USE jobs;
+SET profiling = 1;
+
+-- -----------part1 to part4 is comparation between string length and string type [varchar, text]
+-- -----------the length and complex of regular expression hasn't been count yet.
+-- part 1
+SELECT COUNT(*) AS Q1
+FROM job_posts
+WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q2
+FROM job_posts
+WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q3
+FROM job_posts
+WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 2
+SELECT COUNT(*) AS Q1
+FROM job_posts
+WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q2
+FROM job_posts
+WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q3
+FROM job_posts
+WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 3 because of limit?
+USE jobs2;
+SET profiling = 1;
+
+SELECT COUNT(*) AS Q1
+FROM job_posts
+WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q2
+FROM job_posts
+WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q3
+FROM job_posts
+WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 4
+SELECT COUNT(*) AS Q1
+FROM job_posts
+WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q2
+FROM job_posts
+WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT COUNT(*) AS Q3
+FROM job_posts
+WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 5: add operator, test if operator influence the time as 1+1
+-- Directly
+SELECT count(*)
+FROM job_posts
+WHERE title <> '%Data Analyst%'
+SHOW PROFILES;
+
+SELECT count(*)
+FROM job_posts
+WHERE title = 'Data Analyst' OR description = 'Data Analyst';
+
+SELECT count(*)
+FROM job_posts
+WHERE title = 'Data Analyst' AND description = 'Data Analyst';
+
+-- Using LIKE for pattern matching
+SELECT count(*)
+FROM job_posts
+WHERE title NOT LIKE '%Data Analyst%'
+SHOW PROFILES;
+
+SELECT count(*)
+FROM job_posts
+WHERE title LIKE '%Data Analyst%' OR description LIKE '%Data Analyst%';
+
+SELECT count(*)
+FROM job_posts
+WHERE title LIKE '%Data Analyst%' AND description LIKE '%Data Analyst%';
+
+-- Using REGEXP for regular expression pattern
+SELECT count(*)
+FROM job_posts
+WHERE title NOT REGEXP 'Data Analyst';
+
+SELECT count(*)
+FROM job_posts
+WHERE title NOT REGEXP 'Data Analyst';
+
+-- Using operator in regex pattern
+SELECT count(*)
+FROM job_posts
+WHERE title REGEXP 'data analyst|software engineer';
+
+
+-- ---------------------------------------------------------
+-- part 6: haven't finish yet(add select restriction would optimize?)
+
+SELECT title, company_name, location
+FROM job_posts
+WHERE description LIKE '%Python%';
+
+SELECT title, location, description
+FROM job_posts
+WHERE 
+    (description REGEXP 'data analysis|machine learning')
+    AND (location REGEXP 'New York|San Francisco');
+
+-- ---------------------------------------------------------
+-- part 7: haven't finish yet(other operators in like and regex, for example [ ], and _)
+
+SELECT title, location,company_name, work_from_home, description
+FROM job_posts
+WHERE 
+    (description REGEXP 'Python|Java')
+    AND (work_from_home = 'TRUE' OR description LIKE '%remote%');
