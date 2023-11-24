@@ -1,0 +1,13 @@
+Group 3
+Qifan Gu, Brian Gulko, Aroub Halawani
+DATS-6102-11
+Fall 2023
+Professor Hazim Shatnawi
+
+This project uses SQL and MongoDB to store and analyze data form the csv file 'gsearch_jobs_fixed.csv'.
+
+SQL:
+For SQL XAMPP must be installed and running. From there, go to PHPMyAdmin and then SQL. Then run the code in the 'Import SQL Data.txt' file to create the database, table, and import the data.To do this, the 'gsearch_jobs_fixed.csv' file must be placed in the 'jobs' subfolder after the 'jobs' database is created. The file path should look something like this: 'C:\xampp\mysql\data\jobs'. Alternatively, you can alter the code to specify a different file location for the dataset.
+
+MongoDB:
+Start MongoDBCompass, connect, and create a database (we called ours 'job'). Then create a collection (we called ours 'job_posts'). In that collection use the Add Data feature to import the data from the csv file.
