@@ -1,0 +1,111 @@
+USE jobs3;
+SET profiling = 1;
+
+-- -----------part1 to part3 is comparation between string length and string type [varchar, text]
+-- -----------the length and complex of regular expression hasn't been count yet.
+-- part 1 comparation between searches using long text
+SELECT * FROM job_posts WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 2 short text
+SELECT * FROM job_posts WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title IN ('Data Analyst');
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 3 long char, because of limit?
+USE jobs4;
+SET profiling = 1;
+
+SELECT * FROM job_posts WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 4 short varchar
+SELECT * FROM job_posts WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title IN ('Data Analyst');
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 5: add operator, test if operator influence the time as 1+1
+-- Directly
+SELECT * FROM job_posts WHERE description <> '%Data Analyst%'
+
+SELECT * FROM job_posts WHERE title = 'Data Analyst' OR description = 'Data Analyst';
+
+SELECT * FROM job_posts WHERE title = 'Data Analyst' AND description = 'Data Analyst';
+
+
+-- Using LIKE for pattern matching
+SELECT * FROM job_posts WHERE description NOT LIKE '%Data Analyst%'
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%' OR description LIKE '%Data Analyst%';
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%' AND description LIKE '%Data Analyst%';
+
+
+-- Using REGEXP for regular expression pattern
+SELECT * FROM job_posts WHERE title NOT REGEXP 'Data Analyst';
+
+SELECT * FROM job_posts WHERE title NOT REGEXP 'Data Analyst';
+
+
+-- ---------------------------------------------------------
+-- Using more operator in regexp pattern, see if there's difference
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst|software engineer';
+-- Simulate the and operator in regexp pattern
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst.*software engineer';
+
+-- ---------------------------------------------------------
+-- part 6: Add select restriction would optimize
+
+SELECT title, company_name, location FROM job_posts WHERE description LIKE '%Data Analyst%';
+
+SELECT title, location, description FROM job_posts WHERE title REGEXP 'data analyst|software engineer';
+
+-- ---------------------------------------------------------
+-- part 7: Other more complex regexp (--how they influence the efficiency)
+
+SELECT * FROM job_posts WHERE description REGEXP '[^a-zA-Z](r|R)[^a-zA-Z]'
+
+SELECT * FROM job_posts WHERE description_tokens REGEXP '[^a-zA-Z](r|R)[^a-zA-Z]' AND description_tokens REGEXP '(p|P)ython'
+
+-- ---------------------------------------------------------
+-- part 8: test if seperate to several steps optimize the procedure (if having time to do so.)
+
+WITH [table]
+SELECT * FROM job_posts WHERE [REGEXP2]
+
+
+-- ---------------------------------------------------------
+-- part 9: Try optimize several query expression through what we found. (waiting for finishing)
+
