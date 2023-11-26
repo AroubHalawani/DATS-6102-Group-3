@@ -1,0 +1,118 @@
+USE jobs3;
+SET profiling = 1;
+
+-- -----------part1 to part3 is comparation between string length and string type [varchar, text]
+-- -----------the length and complex of regular expression hasn't been count yet.
+-- part 1 comparation between searches using long text
+SELECT * FROM job_posts WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 2 short text
+SELECT * FROM job_posts WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title IN ('Data Analyst');
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 3 long char, because of limit?
+USE jobs4;
+SET profiling = 1;
+
+SELECT * FROM job_posts WHERE description = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE description REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 4 short varchar
+SELECT * FROM job_posts WHERE title = 'Data Analyst';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title IN ('Data Analyst');
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%';
+SHOW PROFILES;
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst';
+SHOW PROFILES;
+
+-- ---------------------------------------------------------
+-- part 5: add operator, test if operator influence the time as 1+1
+-- Directly
+SELECT * FROM job_posts WHERE description <> '%Data Analyst%';
+
+SELECT * FROM job_posts WHERE title = 'Data Analyst' OR description = 'Data Analyst';
+
+SELECT * FROM job_posts WHERE title = 'Data Analyst' AND description = 'Data Analyst';
+
+
+-- Using LIKE for pattern matching
+SELECT * FROM job_posts WHERE description NOT LIKE '%Data Analyst%';
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%' OR description LIKE '%Data Analyst%';
+
+SELECT * FROM job_posts WHERE title LIKE '%Data Analyst%' AND description LIKE '%Data Analyst%';
+
+
+-- Using REGEXP for regular expression pattern
+SELECT * FROM job_posts WHERE title NOT REGEXP 'Data Analyst';
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst' OR description REGEXP 'Data Analyst';
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst' AND description REGEXP 'Data Analyst';
+
+
+-- ---------------------------------------------------------
+-- Using more operator in regexp pattern, see if there's difference
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst|software engineer';
+-- Simulate the and operator in regexp pattern, suppose there's a order of the two word
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst.*software engineer';
+
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst' OR title REGEXP 'software engineer';
+SELECT * FROM job_posts WHERE title REGEXP 'Data Analyst' AND title REGEXP 'software engineer';
+
+
+-- ---------------------------------------------------------
+-- part 6: Add select restriction would optimize
+SELECT title, company_name, location FROM job_posts WHERE title = 'Data Analyst';
+
+SELECT title, company_name, location FROM job_posts WHERE description LIKE '%Data Analyst%';
+
+SELECT title, company_name, location FROM job_posts WHERE title REGEXP 'Data Analyst';
+
+-- ---------------------------------------------------------
+-- part 7: Other more complex regexp (--how they influence the efficiency)
+
+SELECT * FROM job_posts WHERE description REGEXP 'Job [a-zA-Z ]*[^a-zA-Z][a-zA-Z ]*Data Analyst';
+
+SELECT * FROM job_posts WHERE description REGEXP '(Job [a-zA-Z ]*[^a-zA-Z][a-zA-Z ]*(d|D)ata (a|A)nalyst.*(j|J)ob (c|C)lassification[^a-zA-Z].*full.time|(c|C)ompensation:[a-zA-Z ]*(N|n)on[^a-zA-Z ][a-zA-Z ]*$\b(1[0-9])\b[^a-zA-Z ]*([3-9][0-9]))';
+
+-- ---------------------------------------------------------
+-- part 8: test if seperate to several steps optimize the procedure (if having time to do so.)
+
+WITH [table]
+SELECT * FROM job_posts WHERE [REGEXP2]
+
+
+-- ---------------------------------------------------------
+-- part 9: Try optimize several query expression through what we found. (waiting for finishing)
+
