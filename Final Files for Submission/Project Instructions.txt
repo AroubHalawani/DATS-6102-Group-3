@@ -32,3 +32,4 @@ Test and visualize the results:
 Run the python file Visualization_and_Analysis.ipynb
 This file uses the data from our results stored in Query_Results_for_Submission.xslx.
 
+NOTE: As each version of results take about 9 to 10 hours, Query_Results_for_Submission.xslx may not be the final version when we find some mistakes and rerun the Run_Queries.ipynb code after the submission. 
