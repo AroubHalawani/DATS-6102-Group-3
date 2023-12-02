@@ -8,9 +8,9 @@ This project uses SQL and MongoDB to store data from the csv file 'gsearch_jobs_
 
 
 SQL:
-For SQL XAMPP must be installed and running. From there, go to PHPMyAdmin and then SQL. Then run the code in the 'SQL_Database_Creation.txt' file to create the databases, tables, and import the data. To do this, the 'gsearch_jobs_300k.csv' file must be placed in the 'jobs3' and 'jobs4' subfolders after the databases are created. The file path should look something like this: 'C:\xampp\mysql\data\jobs3'. Alternatively, you can alter the code to specify a different file location for the dataset.
+For SQL XAMPP must be installed and running. From there, go to PHPMyAdmin and then SQL. Then run the code in the 'SQL_Database_Creation.txt' file to create the databases, tables, and import the data. To do this, the 'gsearch_jobs_300k.csv' file must be placed in the 'jobs3' and 'jobs4' subfolders after the databases are created. The file path should look something like this: 'C:\xampp\mysql\data\jobs3'. Alternatively, you can alter the code to specify a different file location for the dataset. 
 
-NOTE: Set the max_execution_time for xmapp php to 600s. Ff there appears to be an error for max_execution_time, the file path is xampp\php\php.ini, modify the line:
+NOTE: Importing the data may take some time. If there appears to be an error for max_execution_time, fpr the file xampp\php\php.ini, modify the line:
 max_execution_time = 600;
 
 
