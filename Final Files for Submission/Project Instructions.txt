@@ -4,7 +4,7 @@ DATS-6102-11
 Fall 2023
 Professor Hazim Shatnawi
 
-This project uses SQL and MongoDB to store data from the csv file 'gsearch_jobs_300k.csv'. This is the link to download the files, in case it is too large to submit to BlackBoard: https://drive.google.com/file/d/1T9nozISK7kpjdHGJlIhLzv6ucT4CEgAd/view?usp=drive_link
+This project uses SQL and MongoDB to store data from the csv file 'gsearch_jobs_300k.csv'. This is the link to download the files, in case it is too large to submit to BlackBoard: https://drive.google.com/file/d/1S6709rcHgVAAZn3hefVKX_tfL6HuJZZQ/view?usp=sharing
 
 
 SQL:
@@ -24,6 +24,8 @@ NOTE: Make sure that the libraries imported are installed before running the cod
 WARNING: Running these queries can be very time consuming. You should only try to run one at a time. Since each query is run 30 times you can expect it to take 15+ minutes per query depending on your computer specs.
 
 When writing the results to an .xlsx file, we recommend that you first create the file in the folder where your notebook is, and with the name of your file_name. We used 'Query_Results_for_Submission.xlsx'
+
+You can double check the queries in the SQL_Queries.txt and Momgo_Queries.txt
 
 
 Test and visualize the results:
