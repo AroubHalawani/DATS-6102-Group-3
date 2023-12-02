@@ -4,7 +4,32 @@ DATS-6102-11
 Fall 2023
 Professor Hazim Shatnawi
 
-This project uses SQL and MongoDB to store and analyze data form the csv file 'gsearch_jobs_fixed.csv'.
+Create the SQL Database:
+HOW??
+
+Upload the data into SQL (10x):
+HOW??
+
+Create the MongoDB Database:
+HOW??
+
+Upload the data into mongoDB (10x):
+HOW??
+
+Run the queries:
+Run the code in the python file _____
+WARNING: Running these queries can be very time consuming. You should only try to run one at a time. Since each query is run 30 times you can expect it to take 15+ minutes per query depending on your computer specs.
+
+Test and visualize the results:
+Run the python file ____
+This file uses the data from our results.
+
+
+
+
+OLD:
+
+This project uses SQL and MongoDB to store data from the csv file 'gsearch_jobs_fixed.csv'.
 
 SQL:
 For SQL XAMPP must be installed and running. From there, go to PHPMyAdmin and then SQL. Then run the code in the 'Import SQL Data.txt' file to create the database, table, and import the data.To do this, the 'gsearch_jobs_fixed.csv' file must be placed in the 'jobs' subfolder after the 'jobs' database is created. The file path should look something like this: 'C:\xampp\mysql\data\jobs'. Alternatively, you can alter the code to specify a different file location for the dataset.
