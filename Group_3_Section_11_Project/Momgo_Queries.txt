@@ -1,0 +1,40 @@
+USE Jobs
+
+
+// part 1~4, query 1~6
+
+db.job_posts2.find({'description' : 'Data Analyst'}).explain("executionStats")
+db.job_posts2.find({'description' : { '$in': ['Data Analyst']}}).explain("executionStats")
+db.job_posts2.find({'description': {'$regex': 'Data Analyst'}}).explain("executionStats")
+
+db.job_posts2.find({'title' : 'Data Analyst'}).explain("executionStats")
+db.job_posts2.find({'title' : { '$in': ['Data Analyst']}}).explain("executionStats")
+db.job_posts2.find({'title' : {'$regex': 'Data Analyst'}}).explain("executionStats")
+
+//part 5, query 7~16: add operator, test if operator influence the time as 1+1
+db.job_posts2.find({'title' : {'$not' : {'$eq':'Data Analyst'}}}).explain("executionStats")
+db.job_posts2.find({'title' : {'$not' : {'$regex': 'Data Analyst'}}}).explain("executionStats")
+
+db.job_posts2.find({'$or' : [{'title' : 'Data Analyst'} , {'description' : 'Data Analyst'}]}).explain("executionStats")
+db.job_posts2.find({'$or' : [{'title' : {'$regex': 'Data Analyst'}} , {'description' : {'$regex': 'Data Analyst'}}]}).explain("executionStats")
+
+db.job_posts2.find({'$and' : [{'title' : 'Data Analyst'} , {'description' : 'Data Analyst'}]}).explain("executionStats")
+db.job_posts2.find({'$and' : [{'title' : {'$regex': 'Data Analyst'}} , {'description' : {'$regex': 'Data Analyst'}}]}).explain("executionStats")
+
+// in regexp
+db.job_posts2.find({'title' : {'$regex': 'Data Analyst|software engineer'}}).explain("executionStats")
+db.job_posts2.find({'title' : {'$regex': 'Data Analyst.*software engineer'}}).explain("executionStats")
+db.job_posts2.find({'$or' : [{'title' : {'$regex': 'Data Analyst'}} , {'title' : {'$regex': 'software engineer'}}]}).explain("executionStats")
+db.job_posts2.find({'$and' : [{'title' : {'$regex': 'Data Analyst'}} , {'title' : {'$regex': 'software engineer'}}]}).explain("executionStats")
+
+
+//part 6: add select restriction would optimize?  query17~18
+db.job_posts2.find({'title' : 'Data Analyst'},{'title':1, 'company_name':1, 'location':1 }).explain("executionStats")
+db.job_posts2.find({'title' : {'$regex': 'Data Analyst'}},{'title':1, 'company_name':1, 'location':1 }).explain("executionStats")
+
+//part 7: Other more complex regexp (--how they influence the efficiency)  query 19~20
+db.job_posts2.find({'description': {'$regex': 'Job [a-zA-Z ]*[^a-zA-Z][a-zA-Z ]*Data Analyst'}}).explain("executionStats")
+db.job_posts2.find({'description': {'$regex': '(Job [a-zA-Z ]*[^a-zA-Z][a-zA-Z ]*(d|D)ata (a|A)nalyst.*(j|J)ob (c|C)lassification[^a-zA-Z].*full.time|(c|C)ompensation:[a-zA-Z ]*(N|n)on[^a-zA-Z ][a-zA-Z ]*$\b(1[0-9])\b[^a-zA-Z ]*([3-9][0-9]))'}}).explain("executionStats")
+
+
+
