@@ -1,0 +1,27 @@
+As the rules of the assignment seem complex to me, can I summarize them as the pattern 1 and 2 below? And I have a question listed at the end of this email.
+
+1. IsParentOf relationships pattern for each node:
+
+first selection	:	[options for relationships]
+Star		:	[Star, E] or [Star, R]
+A		:	[A, E] or [A, R]
+M		:	[M, O]
+O		:	[O, E] or [O, R] or [O, M]
+E		:	[Star, E] or [A, E] or [O, E]
+R		:	[Star, R] or [A, R] or [O, R]
+
+So the total options for the relationship pattern is:  [Star, E], [Star, R], [A, E], [A, R], [M, O], [O, E], [O, R], and we select randomly in the pattern. Meantime a node cannot be a parent of himself.
+
+2. And the pattern for IsChildOf is: select one in [Star, A, M, O],  and select one in [E, R]
+
+We check in the patterns, and  a node cannot have parent(s) with only 'R' or/and 'E' relationships.
+
+
+Questions:
+1. Are rules conflict? As a node cannot have [E, R] and [Star, A, M, O] with its ancestors, how can we have a cycle? So E and R can or cannot have a relationship with that parent of [Star, A, O]?
+Rule 2:Also, a node can't have 'E(s)' and/or 'R(s)' relationships with any of its ancestors, including its parent, grandparent, or any node up to the root node.
+
+Note:4) R' and/or 'E' relationship types cannot point to any parent that has a relationship type  'M'—only 'M'. 
+Or Rule 8
+
+2. Thus, there's no restriction that a node cannot only have [R,E] relationship with it's child, the restriction is only when it apply to child that child cannot only have [R,E] relationship with it's parent.
