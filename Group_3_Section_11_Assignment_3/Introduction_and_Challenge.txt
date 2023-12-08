@@ -1,0 +1,28 @@
+Group 3: Qifan Gu, Brian Gulko, Aroub Halawani
+DATS-6102-11	Fall 2023
+Professor: Hazim Shatnawi
+
+Introduction:
+We follow the assignment3 requirements and rules to create csv files that follow relationships' rules, and then compare the performance of DFS and BFS in 'Cypher', 'APOC library' and 'data science library', and plot out the result with matplotlib.
+By studying on the rules, we finally summarize them mainly as these two below:
+
+1. IsParentOf relationships pattern for each node:
+first selection	:	[options for relationships]
+Star		:	[Star, E] or [Star, R]
+A		:	[A, E] or [A, R]
+M		:	[M, O]
+O		:	[O, E] or [O, R] or [O, M]
+E		:	[Star, E] or [A, E] or [O, E]
+R		:	[Star, R] or [A, R] or [O, R]
+So the total options for the relationship pattern is:  [Star, E], [Star, R], [A, E], [A, R], [M, O], [O, E], [O, R], and we select randomly in the pattern. Meantime a node cannot be a parent of itself or its ancestors.
+
+2. And the pattern for IsChildOf is: select one in [Star, A, M, O],  and select one in [E, R]
+We check in the patterns, （and  a node cannot have parent(s) with only 'R' or/and 'E' relationships， it can be promise by 1, if we do not give a relationship first go by E,R and notice the situation start with a node point to old one
+
+
+Challenges:
+1. The rules are difficult to be summarized and simplified by logic.
+2. Find difficulty in storing or updating ancestors table or dictionary. As the data may be huge, we do not want to update the ancestors one by one for each time or do a recursion search each time. Thus, intuitively, the first thing come to our mind is to use the property 'shallow copy' of python to store the data, so we do a try.
+3. Make a mistake when using the property 'shallow copy' to store ancestors, we just set C = C + B, which seems good but the '+' operation cannot be updated to other certain node(for example you have a D = D + C before, data in B cannot be updated to D), or with .extend function. Actually we first discover the flaw that appears a cycle that should not appear, it really take time to find what cause the problem, as the outcome of 'C = C + B' really looks good and some data can update simultaneously which meet our needs, and finally find that it is because the + operator.
+4. After fix the problem 3, we get this version. Although we do not know if the performance would be better by doing this, as the outcome of the ancestors look like a disaster -- the lists are disordered in the depth, we go further by treating the outcome as a string (believe it will do much better than do the recursion again to get the ancestors list in the shape 1*n ). 
+5. Suddenly forget how I found the plugin page last time. Searching online, looking for document and seeing videos did not give me the answer, finally found that it is because I click to the concrete databases like the 'system' or 'default' but not the DBMS like 'Movie DBMS' etc. which made me couldn't decide whether to laugh or cry. 
